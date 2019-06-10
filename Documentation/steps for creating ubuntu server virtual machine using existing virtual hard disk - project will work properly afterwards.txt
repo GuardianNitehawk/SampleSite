@@ -1,0 +1,26 @@
+Steps to use ubuntu server disk image to create virtual machine to host MySQL database:
+
+1) Open VirtualBox
+2) Create new Linux virtual machine - when you get to the Hard disk screen - choose "Use an existing virtual hard disk file" and select the "ubuntu server - clean install with updates.vdi" file
+3) Once the virtual machine is created - click on Network and change from "NAT" to "NAT Network" (if you don't have a NAT Network created yet, see Creating a NAT Network below)
+4) Now you'll need to get the ip address for your virtual machine, start the machine
+5) Use the login: test and password: test
+6) Run ifconfig and take make a note of the ip address
+7) back in VirtualBox on your host computer, click on File, then Preferences, then Network
+8) Your NAT Network should be selected (if not select it) then click on the Screwdriver icon on the right-hand side of the window
+9) Click Port Forwarding 
+10) click the icon on the right-hand side that has a plus on it, then enter the following:
+	Name: (whatever you want to call it - e.g. MySQL)
+	Protocol: TCP
+	Host IP: 127.0.0.1
+	Host Port: 3306
+	Guest IP: (enter the IP address you got from the virtual machine's ifconfig command)
+	Guest Port: 3306
+
+11) To add a connection to the server in MySQL Workbench use the address 127.0.0.1 on port 3306. login: root and password: sesame (typical MySQL default login credentials)
+12) To add a connection to the server in Visual Studio - use the same credentials as above, but remember to select ".NET Framework Data Provider for MySQL" for the Data Source (if it's not there, make sure you've installed the MySQL Connectors (see installation notes on Google Drive))
+
+
+Creating a NAT Network:
+1) In VirtualBox, click on File, then Preferences, then Network
+2) Click on the icon on the right-hand side of the window (it has a a plus on it)

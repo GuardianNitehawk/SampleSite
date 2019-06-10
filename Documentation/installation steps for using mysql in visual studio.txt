@@ -1,0 +1,11 @@
+Steps to get Visual Studio to recognize MySQL databases:
+
+1) Goto https://www.mysql.com/why-mysql/windows/visualstudio/ 
+2) Click "Download now"
+3) Click "MySQL For Visual Studio"
+4) Click "Download Now"
+5) Click the first "Download" button - (mysql-installer-web-community-5.7.16.0.msi)
+6) Run the file.
+7) Click "Add"
+8) Under "Applications" select "MySQL For Visual Studio" and click the Arrow button to add it to the box on the right. (you'll have to collapse each subfolder until you reach "MySQL for Visual Studio 1.2.6 - X86" before you can click the Arrow button)
+9) Uner "MySQL Connectors" select "Connector/NET" and click the Arrow button to add it to the box on the right (you have to collapse each subfolder... same as above)
