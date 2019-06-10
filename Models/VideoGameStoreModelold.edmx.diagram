@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e70764348bb94a9cbe4814e3ac205c0e" Name="Diagram1">
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Address" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Credit_Card" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Developer" Width="1.5" PointX="1.5" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Friend_List" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Game" Width="1.5" PointX="3.75" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Genre" Width="1.5" PointX="1.5" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Invoice" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Invoice_Address" Width="1.5" PointX="8.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Line_Item" Width="1.5" PointX="8.5" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Province" Width="1.5" PointX="1.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Publisher" Width="1.5" PointX="1.5" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Review" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Store_Event" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Store_Event_User" Width="1.5" PointX="6" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.User" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.User_Address" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.User_Game" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Wish_List" Width="1.5" PointX="8" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoGameStoreDBModel.Sales_Report" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="VideoGameStoreDBModel.address_province_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.invoice_address_address_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.store_event_address_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.user_address_address_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.credit_card_user_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.invoice_credit_card_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.game_developer_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.friend_user_friend_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.friend_user_user_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.game_genre_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.game_publisher_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.line_item_game_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.review_game_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.user_game_game_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.wish_list_game_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.invoice_address_invoice_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.invoice_user_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.line_item_invoice_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.review_user_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.store_event_user_store_event_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.store_event_user_user_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.user_address_user_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.user_game_user_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoGameStoreDBModel.wish_list_user_fk" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

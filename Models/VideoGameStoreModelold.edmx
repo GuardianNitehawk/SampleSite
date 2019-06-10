@@ -1,0 +1,1571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="VideoGameStoreDBModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="address_id" />
+          </Key>
+          <Property Name="address_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="street_address" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="province_id" Type="int" Nullable="false" />
+          <Property Name="postal_code" Type="varchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Credit_Card">
+          <Key>
+            <PropertyRef Name="credit_card_id" />
+          </Key>
+          <Property Name="credit_card_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="card_number" Type="bigint" Nullable="false" />
+          <Property Name="expiry_date" Type="date" Nullable="false" />
+          <Property Name="is_expired" Type="bit" Nullable="false" />
+          <Property Name="is_flagged" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Developer">
+          <Key>
+            <PropertyRef Name="developer_id" />
+          </Key>
+          <Property Name="developer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="developer_name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="contact_name" Type="varchar" MaxLength="25" />
+          <Property Name="contact_phone" Type="varchar" MaxLength="10" />
+          <Property Name="contact_email" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Friend_List">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="friend_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="friend_id" Type="int" Nullable="false" />
+          <Property Name="is_family" Type="bit" Nullable="false" />
+          <Property Name="date_added" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="game_id" />
+          </Key>
+          <Property Name="game_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="game_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="cost" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="list_price" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="on_hand" Type="int" Nullable="false" />
+          <Property Name="developer_id" Type="int" Nullable="false" />
+          <Property Name="publisher_id" Type="int" Nullable="false" />
+          <Property Name="genre_id" Type="int" Nullable="false" />
+          <Property Name="release_date" Type="date" Nullable="false" />
+          <Property Name="is_on_sale" Type="bit" Nullable="false" />
+          <Property Name="is_discontinued" Type="bit" Nullable="false" />
+          <Property Name="is_downloadable" Type="bit" Nullable="false" />
+          <Property Name="is_physical_copy" Type="bit" Nullable="false" />
+          <Property Name="image_location" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="genre_id" />
+          </Key>
+          <Property Name="genre_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="genre_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="invoice_id" />
+          </Key>
+          <Property Name="invoice_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="credit_card_id" Type="int" Nullable="false" />
+          <Property Name="invoice_date" Type="date" Nullable="false" />
+          <Property Name="ship_date" Type="date" />
+          <Property Name="is_invoice_closed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Invoice_Address">
+          <Key>
+            <PropertyRef Name="invoice_address_id" />
+          </Key>
+          <Property Name="invoice_address_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="invoice_id" Type="int" Nullable="false" />
+          <Property Name="address_id" Type="int" Nullable="false" />
+          <Property Name="is_billing_address" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Line_Item">
+          <Key>
+            <PropertyRef Name="line_item_id" />
+          </Key>
+          <Property Name="line_item_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="invoice_id" Type="int" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="province_id" />
+          </Key>
+          <Property Name="province_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="province_code" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="province_name" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="publisher_id" />
+          </Key>
+          <Property Name="publisher_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="publisher_name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="contact_name" Type="varchar" MaxLength="25" />
+          <Property Name="contact_phone" Type="varchar" MaxLength="10" />
+          <Property Name="contact_email" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="review_id" />
+          </Key>
+          <Property Name="review_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="review_date" Type="date" Nullable="false" />
+          <Property Name="review_content" Type="text" Nullable="false" />
+          <Property Name="is_approved" Type="bit" Nullable="false" />
+          <Property Name="is_deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Store_Event">
+          <Key>
+            <PropertyRef Name="store_event_id" />
+          </Key>
+          <Property Name="store_event_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="store_event_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="address_id" Type="int" Nullable="false" />
+          <Property Name="start_date" Type="date" Nullable="false" />
+          <Property Name="end_date" Type="date" Nullable="false" />
+          <Property Name="max_registrants" Type="int" Nullable="false" />
+          <Property Name="is_full" Type="bit" Nullable="false" />
+          <Property Name="is_members_only" Type="bit" Nullable="false" />
+          <Property Name="is_cancelled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Store_Event_User">
+          <Key>
+            <PropertyRef Name="store_event_user_id" />
+          </Key>
+          <Property Name="store_event_user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="store_event_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="user_password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="login_failures" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="birthdate" Type="date" Nullable="false" />
+          <Property Name="date_joined" Type="date" Nullable="false" />
+          <Property Name="is_employee" Type="bit" Nullable="false" />
+          <Property Name="is_admin" Type="bit" Nullable="false" />
+          <Property Name="is_member" Type="bit" Nullable="false" />
+          <Property Name="is_inactive" Type="bit" Nullable="false" />
+          <Property Name="is_locked_out" Type="bit" Nullable="false" />
+          <Property Name="is_on_email_list" Type="bit" Nullable="false" />
+          <Property Name="favorite_platform" Type="varchar" MaxLength="25" />
+          <Property Name="favorite_category" Type="varchar" MaxLength="25" />
+          <Property Name="notes" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="User_Address">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="address_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="address_id" Type="int" Nullable="false" />
+          <Property Name="address_name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="User_Game">
+          <Key>
+            <PropertyRef Name="user_game_id" />
+          </Key>
+          <Property Name="user_game_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="date_purchased" Type="date" Nullable="false" />
+          <Property Name="rating" Type="int" />
+        </EntityType>
+        <EntityType Name="Wish_List">
+          <Key>
+            <PropertyRef Name="wish_list_id" />
+          </Key>
+          <Property Name="wish_list_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="date_added" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.VideoGameStoreDB.Sales_Report' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Sales_Report">
+          <Key>
+            <PropertyRef Name="game_name" />
+          </Key>
+          <Property Name="game_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Units Sold" Type="decimal" Precision="52" Scale="0" />
+          <Property Name="Profit Margin" Type="decimal" Precision="16" Scale="6" />
+          <Property Name="Sales Volume" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="Total Profit" Type="decimal" Precision="51" Scale="8" />
+        </EntityType>
+        <Association Name="address_province_fk">
+          <End Role="Province" Type="Self.Province" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="province_id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="province_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="credit_card_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Credit_Card" Type="Self.Credit_Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Credit_Card">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="friend_user_friend_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Friend_List" Type="Self.Friend_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Friend_List">
+              <PropertyRef Name="friend_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="friend_user_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Friend_List" Type="Self.Friend_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Friend_List">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="game_developer_fk">
+          <End Role="Developer" Type="Self.Developer" Multiplicity="1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Developer">
+              <PropertyRef Name="developer_id" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="developer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="game_genre_fk">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="genre_id" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="game_publisher_fk">
+          <End Role="Publisher" Type="Self.Publisher" Multiplicity="1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publisher">
+              <PropertyRef Name="publisher_id" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="publisher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="invoice_address_address_fk">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Invoice_Address" Type="Self.Invoice_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="address_id" />
+            </Principal>
+            <Dependent Role="Invoice_Address">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="invoice_address_invoice_fk">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="Invoice_Address" Type="Self.Invoice_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="invoice_id" />
+            </Principal>
+            <Dependent Role="Invoice_Address">
+              <PropertyRef Name="invoice_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="invoice_credit_card_fk">
+          <End Role="Credit_Card" Type="Self.Credit_Card" Multiplicity="1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Credit_Card">
+              <PropertyRef Name="credit_card_id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="credit_card_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="invoice_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="line_item_game_fk">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="Line_Item" Type="Self.Line_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="Line_Item">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="line_item_invoice_fk">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="Line_Item" Type="Self.Line_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="invoice_id" />
+            </Principal>
+            <Dependent Role="Line_Item">
+              <PropertyRef Name="invoice_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="review_game_fk">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="review_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="store_event_address_fk">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Store_Event" Type="Self.Store_Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="address_id" />
+            </Principal>
+            <Dependent Role="Store_Event">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="store_event_user_store_event_fk">
+          <End Role="Store_Event" Type="Self.Store_Event" Multiplicity="1" />
+          <End Role="Store_Event_User" Type="Self.Store_Event_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store_Event">
+              <PropertyRef Name="store_event_id" />
+            </Principal>
+            <Dependent Role="Store_Event_User">
+              <PropertyRef Name="store_event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="store_event_user_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Store_Event_User" Type="Self.Store_Event_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Store_Event_User">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_address_address_fk">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="User_Address" Type="Self.User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="address_id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_address_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Address" Type="Self.User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_game_game_fk">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="User_Game" Type="Self.User_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="User_Game">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_game_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Game" Type="Self.User_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="User_Game">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="wish_list_game_fk">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="Wish_List" Type="Self.Wish_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="Wish_List">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="wish_list_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Wish_List" Type="Self.Wish_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Wish_List">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VideoGameStoreDBModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Credit_Card" EntityType="Self.Credit_Card" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Developer" EntityType="Self.Developer" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Friend_List" EntityType="Self.Friend_List" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Game" EntityType="Self.Game" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Invoice_Address" EntityType="Self.Invoice_Address" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Line_Item" EntityType="Self.Line_Item" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Province" EntityType="Self.Province" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Review" EntityType="Self.Review" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Store_Event" EntityType="Self.Store_Event" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Store_Event_User" EntityType="Self.Store_Event_User" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="User_Address" EntityType="Self.User_Address" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="User_Game" EntityType="Self.User_Game" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Wish_List" EntityType="Self.Wish_List" Schema="VideoGameStoreDB" store:Type="Tables" />
+          <EntitySet Name="Sales_Report" EntityType="Self.Sales_Report" store:Type="Views" store:Schema="VideoGameStoreDB">
+            <DefiningQuery>SELECT
+`Sales_Report`.`game_name`, 
+`Sales_Report`.`Units Sold`, 
+`Sales_Report`.`Profit Margin`, 
+`Sales_Report`.`Sales Volume`, 
+`Sales_Report`.`Total Profit`
+FROM `Sales_Report` AS `Sales_Report`</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="address_province_fk" Association="Self.address_province_fk">
+            <End Role="Province" EntitySet="Province" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="credit_card_user_fk" Association="Self.credit_card_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Credit_Card" EntitySet="Credit_Card" />
+          </AssociationSet>
+          <AssociationSet Name="friend_user_friend_fk" Association="Self.friend_user_friend_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Friend_List" EntitySet="Friend_List" />
+          </AssociationSet>
+          <AssociationSet Name="friend_user_user_fk" Association="Self.friend_user_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Friend_List" EntitySet="Friend_List" />
+          </AssociationSet>
+          <AssociationSet Name="game_developer_fk" Association="Self.game_developer_fk">
+            <End Role="Developer" EntitySet="Developer" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="game_genre_fk" Association="Self.game_genre_fk">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="game_publisher_fk" Association="Self.game_publisher_fk">
+            <End Role="Publisher" EntitySet="Publisher" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="invoice_address_address_fk" Association="Self.invoice_address_address_fk">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Invoice_Address" EntitySet="Invoice_Address" />
+          </AssociationSet>
+          <AssociationSet Name="invoice_address_invoice_fk" Association="Self.invoice_address_invoice_fk">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Invoice_Address" EntitySet="Invoice_Address" />
+          </AssociationSet>
+          <AssociationSet Name="invoice_credit_card_fk" Association="Self.invoice_credit_card_fk">
+            <End Role="Credit_Card" EntitySet="Credit_Card" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="invoice_user_fk" Association="Self.invoice_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="line_item_game_fk" Association="Self.line_item_game_fk">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="Line_Item" EntitySet="Line_Item" />
+          </AssociationSet>
+          <AssociationSet Name="line_item_invoice_fk" Association="Self.line_item_invoice_fk">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Line_Item" EntitySet="Line_Item" />
+          </AssociationSet>
+          <AssociationSet Name="review_game_fk" Association="Self.review_game_fk">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="review_user_fk" Association="Self.review_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="store_event_address_fk" Association="Self.store_event_address_fk">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Store_Event" EntitySet="Store_Event" />
+          </AssociationSet>
+          <AssociationSet Name="store_event_user_store_event_fk" Association="Self.store_event_user_store_event_fk">
+            <End Role="Store_Event" EntitySet="Store_Event" />
+            <End Role="Store_Event_User" EntitySet="Store_Event_User" />
+          </AssociationSet>
+          <AssociationSet Name="store_event_user_user_fk" Association="Self.store_event_user_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Store_Event_User" EntitySet="Store_Event_User" />
+          </AssociationSet>
+          <AssociationSet Name="user_address_address_fk" Association="Self.user_address_address_fk">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <AssociationSet Name="user_address_user_fk" Association="Self.user_address_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <AssociationSet Name="user_game_game_fk" Association="Self.user_game_game_fk">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="User_Game" EntitySet="User_Game" />
+          </AssociationSet>
+          <AssociationSet Name="user_game_user_fk" Association="Self.user_game_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Game" EntitySet="User_Game" />
+          </AssociationSet>
+          <AssociationSet Name="wish_list_game_fk" Association="Self.wish_list_game_fk">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="Wish_List" EntitySet="Wish_List" />
+          </AssociationSet>
+          <AssociationSet Name="wish_list_user_fk" Association="Self.wish_list_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Wish_List" EntitySet="Wish_List" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VideoGameStoreDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="address_id" />
+          </Key>
+          <Property Name="address_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="street_address" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="province_id" Type="Int32" Nullable="false" />
+          <Property Name="postal_code" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Province" Relationship="Self.address_province_fk" FromRole="Address" ToRole="Province" />
+          <NavigationProperty Name="Invoice_Address" Relationship="Self.invoice_address_address_fk" FromRole="Address" ToRole="Invoice_Address" />
+          <NavigationProperty Name="Store_Event" Relationship="Self.store_event_address_fk" FromRole="Address" ToRole="Store_Event" />
+          <NavigationProperty Name="User_Address" Relationship="Self.user_address_address_fk" FromRole="Address" ToRole="User_Address" />
+        </EntityType>
+        <EntityType Name="Credit_Card">
+          <Key>
+            <PropertyRef Name="credit_card_id" />
+          </Key>
+          <Property Name="credit_card_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="card_number" Type="Int64" Nullable="false" />
+          <Property Name="expiry_date" Type="DateTime" Nullable="false" />
+          <Property Name="is_expired" Type="Boolean" Nullable="false" />
+          <Property Name="is_flagged" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.credit_card_user_fk" FromRole="Credit_Card" ToRole="User" />
+          <NavigationProperty Name="Invoices" Relationship="Self.invoice_credit_card_fk" FromRole="Credit_Card" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="Developer">
+          <Key>
+            <PropertyRef Name="developer_id" />
+          </Key>
+          <Property Name="developer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="developer_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="contact_phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="contact_email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Games" Relationship="Self.game_developer_fk" FromRole="Developer" ToRole="Game" />
+        </EntityType>
+        <EntityType Name="Friend_List">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="friend_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="friend_id" Type="Int32" Nullable="false" />
+          <Property Name="is_family" Type="Boolean" Nullable="false" />
+          <Property Name="date_added" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.friend_user_friend_fk" FromRole="Friend_List" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.friend_user_user_fk" FromRole="Friend_List" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="game_id" />
+          </Key>
+          <Property Name="game_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="game_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Nullable="false" />
+          <Property Name="list_price" Type="Decimal" Nullable="false" />
+          <Property Name="on_hand" Type="Int32" Nullable="false" />
+          <Property Name="developer_id" Type="Int32" Nullable="false" />
+          <Property Name="publisher_id" Type="Int32" Nullable="false" />
+          <Property Name="genre_id" Type="Int32" Nullable="false" />
+          <Property Name="release_date" Type="DateTime" Nullable="false" />
+          <Property Name="is_on_sale" Type="Boolean" Nullable="false" />
+          <Property Name="is_discontinued" Type="Boolean" Nullable="false" />
+          <Property Name="is_downloadable" Type="Boolean" Nullable="false" />
+          <Property Name="is_physical_copy" Type="Boolean" Nullable="false" />
+          <Property Name="image_location" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Developer" Relationship="Self.game_developer_fk" FromRole="Game" ToRole="Developer" />
+          <NavigationProperty Name="Genre" Relationship="Self.game_genre_fk" FromRole="Game" ToRole="Genre" />
+          <NavigationProperty Name="Publisher" Relationship="Self.game_publisher_fk" FromRole="Game" ToRole="Publisher" />
+          <NavigationProperty Name="Line_Item" Relationship="Self.line_item_game_fk" FromRole="Game" ToRole="Line_Item" />
+          <NavigationProperty Name="Reviews" Relationship="Self.review_game_fk" FromRole="Game" ToRole="Review" />
+          <NavigationProperty Name="User_Game" Relationship="Self.user_game_game_fk" FromRole="Game" ToRole="User_Game" />
+          <NavigationProperty Name="Wish_List" Relationship="Self.wish_list_game_fk" FromRole="Game" ToRole="Wish_List" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="genre_id" />
+          </Key>
+          <Property Name="genre_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="genre_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Games" Relationship="Self.game_genre_fk" FromRole="Genre" ToRole="Game" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="invoice_id" />
+          </Key>
+          <Property Name="invoice_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="credit_card_id" Type="Int32" Nullable="false" />
+          <Property Name="invoice_date" Type="DateTime" Nullable="false" />
+          <Property Name="ship_date" Type="DateTime" />
+          <Property Name="is_invoice_closed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Credit_Card" Relationship="Self.invoice_credit_card_fk" FromRole="Invoice" ToRole="Credit_Card" />
+          <NavigationProperty Name="Invoice_Address" Relationship="Self.invoice_address_invoice_fk" FromRole="Invoice" ToRole="Invoice_Address" />
+          <NavigationProperty Name="User" Relationship="Self.invoice_user_fk" FromRole="Invoice" ToRole="User" />
+          <NavigationProperty Name="Line_Item" Relationship="Self.line_item_invoice_fk" FromRole="Invoice" ToRole="Line_Item" />
+        </EntityType>
+        <EntityType Name="Invoice_Address">
+          <Key>
+            <PropertyRef Name="invoice_address_id" />
+          </Key>
+          <Property Name="invoice_address_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="invoice_id" Type="Int32" Nullable="false" />
+          <Property Name="address_id" Type="Int32" Nullable="false" />
+          <Property Name="is_billing_address" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.invoice_address_address_fk" FromRole="Invoice_Address" ToRole="Address" />
+          <NavigationProperty Name="Invoice" Relationship="Self.invoice_address_invoice_fk" FromRole="Invoice_Address" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="Line_Item">
+          <Key>
+            <PropertyRef Name="line_item_id" />
+          </Key>
+          <Property Name="line_item_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="invoice_id" Type="Int32" Nullable="false" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="Game" Relationship="Self.line_item_game_fk" FromRole="Line_Item" ToRole="Game" />
+          <NavigationProperty Name="Invoice" Relationship="Self.line_item_invoice_fk" FromRole="Line_Item" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="province_id" />
+          </Key>
+          <Property Name="province_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="province_code" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="province_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="Self.address_province_fk" FromRole="Province" ToRole="Address" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="publisher_id" />
+          </Key>
+          <Property Name="publisher_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="publisher_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="contact_phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="contact_email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Games" Relationship="Self.game_publisher_fk" FromRole="Publisher" ToRole="Game" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="review_id" />
+          </Key>
+          <Property Name="review_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="review_date" Type="DateTime" Nullable="false" />
+          <Property Name="is_approved" Type="Boolean" Nullable="false" />
+          <Property Name="is_deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Game" Relationship="Self.review_game_fk" FromRole="Review" ToRole="Game" />
+          <NavigationProperty Name="User" Relationship="Self.review_user_fk" FromRole="Review" ToRole="User" />
+          <Property Name="review_content" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Store_Event">
+          <Key>
+            <PropertyRef Name="store_event_id" />
+          </Key>
+          <Property Name="store_event_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="store_event_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address_id" Type="Int32" Nullable="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" />
+          <Property Name="max_registrants" Type="Int32" Nullable="false" />
+          <Property Name="is_full" Type="Boolean" Nullable="false" />
+          <Property Name="is_members_only" Type="Boolean" Nullable="false" />
+          <Property Name="is_cancelled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.store_event_address_fk" FromRole="Store_Event" ToRole="Address" />
+          <NavigationProperty Name="Store_Event_User" Relationship="Self.store_event_user_store_event_fk" FromRole="Store_Event" ToRole="Store_Event_User" />
+        </EntityType>
+        <EntityType Name="Store_Event_User">
+          <Key>
+            <PropertyRef Name="store_event_user_id" />
+          </Key>
+          <Property Name="store_event_user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="store_event_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Store_Event" Relationship="Self.store_event_user_store_event_fk" FromRole="Store_Event_User" ToRole="Store_Event" />
+          <NavigationProperty Name="User" Relationship="Self.store_event_user_user_fk" FromRole="Store_Event_User" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="login_failures" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="birthdate" Type="DateTime" Nullable="false" />
+          <Property Name="date_joined" Type="DateTime" Nullable="false" />
+          <Property Name="is_employee" Type="Boolean" Nullable="false" />
+          <Property Name="is_admin" Type="Boolean" Nullable="false" />
+          <Property Name="is_member" Type="Boolean" Nullable="false" />
+          <Property Name="is_inactive" Type="Boolean" Nullable="false" />
+          <Property Name="is_locked_out" Type="Boolean" Nullable="false" />
+          <Property Name="is_on_email_list" Type="Boolean" Nullable="false" />
+          <Property Name="favorite_platform" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="favorite_category" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="notes" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Credit_Card" Relationship="Self.credit_card_user_fk" FromRole="User" ToRole="Credit_Card" />
+          <NavigationProperty Name="Friend_List" Relationship="Self.friend_user_friend_fk" FromRole="User" ToRole="Friend_List" />
+          <NavigationProperty Name="Friend_List1" Relationship="Self.friend_user_user_fk" FromRole="User" ToRole="Friend_List" />
+          <NavigationProperty Name="Invoices" Relationship="Self.invoice_user_fk" FromRole="User" ToRole="Invoice" />
+          <NavigationProperty Name="Reviews" Relationship="Self.review_user_fk" FromRole="User" ToRole="Review" />
+          <NavigationProperty Name="Store_Event_User" Relationship="Self.store_event_user_user_fk" FromRole="User" ToRole="Store_Event_User" />
+          <NavigationProperty Name="User_Address" Relationship="Self.user_address_user_fk" FromRole="User" ToRole="User_Address" />
+          <NavigationProperty Name="User_Game" Relationship="Self.user_game_user_fk" FromRole="User" ToRole="User_Game" />
+          <NavigationProperty Name="Wish_List" Relationship="Self.wish_list_user_fk" FromRole="User" ToRole="Wish_List" />
+        </EntityType>
+        <EntityType Name="User_Address">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="address_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="address_id" Type="Int32" Nullable="false" />
+          <Property Name="address_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Address" Relationship="Self.user_address_address_fk" FromRole="User_Address" ToRole="Address" />
+          <NavigationProperty Name="User" Relationship="Self.user_address_user_fk" FromRole="User_Address" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User_Game">
+          <Key>
+            <PropertyRef Name="user_game_id" />
+          </Key>
+          <Property Name="user_game_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="date_purchased" Type="DateTime" Nullable="false" />
+          <Property Name="rating" Type="Int32" />
+          <NavigationProperty Name="Game" Relationship="Self.user_game_game_fk" FromRole="User_Game" ToRole="Game" />
+          <NavigationProperty Name="User" Relationship="Self.user_game_user_fk" FromRole="User_Game" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Wish_List">
+          <Key>
+            <PropertyRef Name="wish_list_id" />
+          </Key>
+          <Property Name="wish_list_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="date_added" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Game" Relationship="Self.wish_list_game_fk" FromRole="Wish_List" ToRole="Game" />
+          <NavigationProperty Name="User" Relationship="Self.wish_list_user_fk" FromRole="Wish_List" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Sales_Report">
+          <Key>
+            <PropertyRef Name="game_name" />
+          </Key>
+          <Property Name="game_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Units_Sold" Type="Decimal" />
+          <Property Name="Profit_Margin" Type="Decimal" />
+          <Property Name="Sales_Volume" Type="Decimal" />
+          <Property Name="Total_Profit" Type="Decimal" />
+        </EntityType>
+        <Association Name="address_province_fk">
+          <End Role="Province" Type="Self.Province" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="province_id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="province_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="invoice_address_address_fk">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Invoice_Address" Type="Self.Invoice_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="address_id" />
+            </Principal>
+            <Dependent Role="Invoice_Address">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="store_event_address_fk">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Store_Event" Type="Self.Store_Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="address_id" />
+            </Principal>
+            <Dependent Role="Store_Event">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_address_address_fk">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="User_Address" Type="Self.User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="address_id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="credit_card_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Credit_Card" Type="Self.Credit_Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Credit_Card">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="invoice_credit_card_fk">
+          <End Role="Credit_Card" Type="Self.Credit_Card" Multiplicity="1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Credit_Card">
+              <PropertyRef Name="credit_card_id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="credit_card_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="game_developer_fk">
+          <End Role="Developer" Type="Self.Developer" Multiplicity="1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Developer">
+              <PropertyRef Name="developer_id" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="developer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="friend_user_friend_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Friend_List" Type="Self.Friend_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Friend_List">
+              <PropertyRef Name="friend_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="friend_user_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Friend_List" Type="Self.Friend_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Friend_List">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="game_genre_fk">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="genre_id" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="game_publisher_fk">
+          <End Role="Publisher" Type="Self.Publisher" Multiplicity="1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publisher">
+              <PropertyRef Name="publisher_id" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="publisher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="line_item_game_fk">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="Line_Item" Type="Self.Line_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="Line_Item">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="review_game_fk">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_game_game_fk">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="User_Game" Type="Self.User_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="User_Game">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="wish_list_game_fk">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="Wish_List" Type="Self.Wish_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="Wish_List">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="invoice_address_invoice_fk">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="Invoice_Address" Type="Self.Invoice_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="invoice_id" />
+            </Principal>
+            <Dependent Role="Invoice_Address">
+              <PropertyRef Name="invoice_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="invoice_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="line_item_invoice_fk">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="Line_Item" Type="Self.Line_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="invoice_id" />
+            </Principal>
+            <Dependent Role="Line_Item">
+              <PropertyRef Name="invoice_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="review_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="store_event_user_store_event_fk">
+          <End Role="Store_Event" Type="Self.Store_Event" Multiplicity="1" />
+          <End Role="Store_Event_User" Type="Self.Store_Event_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store_Event">
+              <PropertyRef Name="store_event_id" />
+            </Principal>
+            <Dependent Role="Store_Event_User">
+              <PropertyRef Name="store_event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="store_event_user_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Store_Event_User" Type="Self.Store_Event_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Store_Event_User">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_address_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Address" Type="Self.User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_game_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Game" Type="Self.User_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="User_Game">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="wish_list_user_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Wish_List" Type="Self.Wish_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Wish_List">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VideoGameStoreDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Credit_Card" EntityType="Self.Credit_Card" />
+          <EntitySet Name="Developers" EntityType="Self.Developer" />
+          <EntitySet Name="Friend_List" EntityType="Self.Friend_List" />
+          <EntitySet Name="Games" EntityType="Self.Game" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+          <EntitySet Name="Invoice_Address" EntityType="Self.Invoice_Address" />
+          <EntitySet Name="Line_Item" EntityType="Self.Line_Item" />
+          <EntitySet Name="Provinces" EntityType="Self.Province" />
+          <EntitySet Name="Publishers" EntityType="Self.Publisher" />
+          <EntitySet Name="Reviews" EntityType="Self.Review" />
+          <EntitySet Name="Store_Event" EntityType="Self.Store_Event" />
+          <EntitySet Name="Store_Event_User" EntityType="Self.Store_Event_User" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="User_Address" EntityType="Self.User_Address" />
+          <EntitySet Name="User_Game" EntityType="Self.User_Game" />
+          <EntitySet Name="Wish_List" EntityType="Self.Wish_List" />
+          <EntitySet Name="Sales_Report" EntityType="Self.Sales_Report" />
+          <AssociationSet Name="address_province_fk" Association="Self.address_province_fk">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="invoice_address_address_fk" Association="Self.invoice_address_address_fk">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Invoice_Address" EntitySet="Invoice_Address" />
+          </AssociationSet>
+          <AssociationSet Name="store_event_address_fk" Association="Self.store_event_address_fk">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Store_Event" EntitySet="Store_Event" />
+          </AssociationSet>
+          <AssociationSet Name="user_address_address_fk" Association="Self.user_address_address_fk">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <AssociationSet Name="credit_card_user_fk" Association="Self.credit_card_user_fk">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Credit_Card" EntitySet="Credit_Card" />
+          </AssociationSet>
+          <AssociationSet Name="invoice_credit_card_fk" Association="Self.invoice_credit_card_fk">
+            <End Role="Credit_Card" EntitySet="Credit_Card" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="game_developer_fk" Association="Self.game_developer_fk">
+            <End Role="Developer" EntitySet="Developers" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="friend_user_friend_fk" Association="Self.friend_user_friend_fk">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Friend_List" EntitySet="Friend_List" />
+          </AssociationSet>
+          <AssociationSet Name="friend_user_user_fk" Association="Self.friend_user_user_fk">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Friend_List" EntitySet="Friend_List" />
+          </AssociationSet>
+          <AssociationSet Name="game_genre_fk" Association="Self.game_genre_fk">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="game_publisher_fk" Association="Self.game_publisher_fk">
+            <End Role="Publisher" EntitySet="Publishers" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="line_item_game_fk" Association="Self.line_item_game_fk">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="Line_Item" EntitySet="Line_Item" />
+          </AssociationSet>
+          <AssociationSet Name="review_game_fk" Association="Self.review_game_fk">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="user_game_game_fk" Association="Self.user_game_game_fk">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="User_Game" EntitySet="User_Game" />
+          </AssociationSet>
+          <AssociationSet Name="wish_list_game_fk" Association="Self.wish_list_game_fk">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="Wish_List" EntitySet="Wish_List" />
+          </AssociationSet>
+          <AssociationSet Name="invoice_address_invoice_fk" Association="Self.invoice_address_invoice_fk">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="Invoice_Address" EntitySet="Invoice_Address" />
+          </AssociationSet>
+          <AssociationSet Name="invoice_user_fk" Association="Self.invoice_user_fk">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="line_item_invoice_fk" Association="Self.line_item_invoice_fk">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="Line_Item" EntitySet="Line_Item" />
+          </AssociationSet>
+          <AssociationSet Name="review_user_fk" Association="Self.review_user_fk">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="store_event_user_store_event_fk" Association="Self.store_event_user_store_event_fk">
+            <End Role="Store_Event" EntitySet="Store_Event" />
+            <End Role="Store_Event_User" EntitySet="Store_Event_User" />
+          </AssociationSet>
+          <AssociationSet Name="store_event_user_user_fk" Association="Self.store_event_user_user_fk">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Store_Event_User" EntitySet="Store_Event_User" />
+          </AssociationSet>
+          <AssociationSet Name="user_address_user_fk" Association="Self.user_address_user_fk">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <AssociationSet Name="user_game_user_fk" Association="Self.user_game_user_fk">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_Game" EntitySet="User_Game" />
+          </AssociationSet>
+          <AssociationSet Name="wish_list_user_fk" Association="Self.wish_list_user_fk">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Wish_List" EntitySet="Wish_List" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VideoGameStoreDBModelStoreContainer" CdmEntityContainer="VideoGameStoreDBContext">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="street_address" ColumnName="street_address" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="province_id" ColumnName="province_id" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Credit_Card">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Credit_Card">
+              <MappingFragment StoreEntitySet="Credit_Card">
+                <ScalarProperty Name="credit_card_id" ColumnName="credit_card_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="card_number" ColumnName="card_number" />
+                <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+                <ScalarProperty Name="is_expired" ColumnName="is_expired" />
+                <ScalarProperty Name="is_flagged" ColumnName="is_flagged" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Developers">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Developer">
+              <MappingFragment StoreEntitySet="Developer">
+                <ScalarProperty Name="developer_id" ColumnName="developer_id" />
+                <ScalarProperty Name="developer_name" ColumnName="developer_name" />
+                <ScalarProperty Name="contact_name" ColumnName="contact_name" />
+                <ScalarProperty Name="contact_phone" ColumnName="contact_phone" />
+                <ScalarProperty Name="contact_email" ColumnName="contact_email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Friend_List">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Friend_List">
+              <MappingFragment StoreEntitySet="Friend_List">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="friend_id" ColumnName="friend_id" />
+                <ScalarProperty Name="is_family" ColumnName="is_family" />
+                <ScalarProperty Name="date_added" ColumnName="date_added" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Game">
+              <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="game_name" ColumnName="game_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="list_price" ColumnName="list_price" />
+                <ScalarProperty Name="on_hand" ColumnName="on_hand" />
+                <ScalarProperty Name="developer_id" ColumnName="developer_id" />
+                <ScalarProperty Name="publisher_id" ColumnName="publisher_id" />
+                <ScalarProperty Name="genre_id" ColumnName="genre_id" />
+                <ScalarProperty Name="release_date" ColumnName="release_date" />
+                <ScalarProperty Name="is_on_sale" ColumnName="is_on_sale" />
+                <ScalarProperty Name="is_discontinued" ColumnName="is_discontinued" />
+                <ScalarProperty Name="is_downloadable" ColumnName="is_downloadable" />
+                <ScalarProperty Name="is_physical_copy" ColumnName="is_physical_copy" />
+                <ScalarProperty Name="image_location" ColumnName="image_location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="genre_id" ColumnName="genre_id" />
+                <ScalarProperty Name="genre_name" ColumnName="genre_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="credit_card_id" ColumnName="credit_card_id" />
+                <ScalarProperty Name="invoice_date" ColumnName="invoice_date" />
+                <ScalarProperty Name="ship_date" ColumnName="ship_date" />
+                <ScalarProperty Name="is_invoice_closed" ColumnName="is_invoice_closed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoice_Address">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Invoice_Address">
+              <MappingFragment StoreEntitySet="Invoice_Address">
+                <ScalarProperty Name="invoice_address_id" ColumnName="invoice_address_id" />
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="is_billing_address" ColumnName="is_billing_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Line_Item">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Line_Item">
+              <MappingFragment StoreEntitySet="Line_Item">
+                <ScalarProperty Name="line_item_id" ColumnName="line_item_id" />
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provinces">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Province">
+              <MappingFragment StoreEntitySet="Province">
+                <ScalarProperty Name="province_id" ColumnName="province_id" />
+                <ScalarProperty Name="province_code" ColumnName="province_code" />
+                <ScalarProperty Name="province_name" ColumnName="province_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publishers">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Publisher">
+              <MappingFragment StoreEntitySet="Publisher">
+                <ScalarProperty Name="publisher_id" ColumnName="publisher_id" />
+                <ScalarProperty Name="publisher_name" ColumnName="publisher_name" />
+                <ScalarProperty Name="contact_name" ColumnName="contact_name" />
+                <ScalarProperty Name="contact_phone" ColumnName="contact_phone" />
+                <ScalarProperty Name="contact_email" ColumnName="contact_email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="review_content" ColumnName="review_content" />
+                <ScalarProperty Name="review_id" ColumnName="review_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="review_date" ColumnName="review_date" />
+                <ScalarProperty Name="is_approved" ColumnName="is_approved" />
+                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_Event">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Store_Event">
+              <MappingFragment StoreEntitySet="Store_Event">
+                <ScalarProperty Name="store_event_id" ColumnName="store_event_id" />
+                <ScalarProperty Name="store_event_name" ColumnName="store_event_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="max_registrants" ColumnName="max_registrants" />
+                <ScalarProperty Name="is_full" ColumnName="is_full" />
+                <ScalarProperty Name="is_members_only" ColumnName="is_members_only" />
+                <ScalarProperty Name="is_cancelled" ColumnName="is_cancelled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_Event_User">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Store_Event_User">
+              <MappingFragment StoreEntitySet="Store_Event_User">
+                <ScalarProperty Name="store_event_user_id" ColumnName="store_event_user_id" />
+                <ScalarProperty Name="store_event_id" ColumnName="store_event_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="user_password" ColumnName="user_password" />
+                <ScalarProperty Name="login_failures" ColumnName="login_failures" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="date_joined" ColumnName="date_joined" />
+                <ScalarProperty Name="is_employee" ColumnName="is_employee" />
+                <ScalarProperty Name="is_admin" ColumnName="is_admin" />
+                <ScalarProperty Name="is_member" ColumnName="is_member" />
+                <ScalarProperty Name="is_inactive" ColumnName="is_inactive" />
+                <ScalarProperty Name="is_locked_out" ColumnName="is_locked_out" />
+                <ScalarProperty Name="is_on_email_list" ColumnName="is_on_email_list" />
+                <ScalarProperty Name="favorite_platform" ColumnName="favorite_platform" />
+                <ScalarProperty Name="favorite_category" ColumnName="favorite_category" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Address">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.User_Address">
+              <MappingFragment StoreEntitySet="User_Address">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="address_name" ColumnName="address_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Game">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.User_Game">
+              <MappingFragment StoreEntitySet="User_Game">
+                <ScalarProperty Name="user_game_id" ColumnName="user_game_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="date_purchased" ColumnName="date_purchased" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wish_List">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Wish_List">
+              <MappingFragment StoreEntitySet="Wish_List">
+                <ScalarProperty Name="wish_list_id" ColumnName="wish_list_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="date_added" ColumnName="date_added" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales_Report">
+            <EntityTypeMapping TypeName="VideoGameStoreDBModel.Sales_Report">
+              <MappingFragment StoreEntitySet="Sales_Report">
+                <ScalarProperty Name="game_name" ColumnName="game_name" />
+                <ScalarProperty Name="Units_Sold" ColumnName="Units Sold" />
+                <ScalarProperty Name="Profit_Margin" ColumnName="Profit Margin" />
+                <ScalarProperty Name="Sales_Volume" ColumnName="Sales Volume" />
+                <ScalarProperty Name="Total_Profit" ColumnName="Total Profit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
